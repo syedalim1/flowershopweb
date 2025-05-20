@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Flower Store</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+  <link rel="stylesheet" href="project.css">
+  <script src="script.js"></script>
+
+  <style>
+    /* Admin Page Specific Styles */
+    .admin-container {
+      margin-top: 7rem;
+      padding: 3rem 9%;
+    }
+
+    .admin-header {
+      background: linear-gradient(135deg, #e84393, #a94caf, #7e57c2);
+      padding: 4rem;
+      border-radius: 1rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      box-shadow: var(--box-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .admin-header h1 {
+      font-size: 4rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .admin-header p {
+      font-size: 1.8rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .admin-header::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 1;
+    }
+
+    .admin-header::after {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: -50px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 1;
+    }
+
+    .admin-tabs {
+      display: flex;
+      background: #fff;
+      border-radius: 0.5rem;
+      box-shadow: var(--box-shadow);
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 1.5rem;
+      font-size: 1.6rem;
+      text-align: center;
+      background: #fff;
+      color: var(--black);
+      cursor: pointer;
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--pink);
+      color: #fff;
+    }
+
+    .tab-btn:hover:not(.active) {
+      background: #f8f8f8;
+    }
+
+    .tab-content {
+      display: none;
+      background: #fff;
+      padding: 3rem;
+      border-radius: 0.5rem;
+      box-shadow: var(--box-shadow);
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .dashboard-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: #fff;
+      border-radius: 0.5rem;
+      padding: 2rem;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-icon {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 2rem;
+      font-size: 2.5rem;
+    }
+
+    .stat-icon.sales {
+      background: rgba(232, 67, 147, 0.1);
+      color: var(--pink);
+    }
+
+    .stat-icon.orders {
+      background: rgba(76, 175, 80, 0.1);
+      color: var(--green);
+    }
+
+    .stat-icon.customers {
+      background: rgba(33, 150, 243, 0.1);
+      color: #2196f3;
+    }
+
+    .stat-icon.products {
+      background: rgba(255, 152, 0, 0.1);
+      color: #ff9800;
+    }
+
+    .stat-details h3 {
+      font-size: 2.5rem;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-details p {
+      font-size: 1.4rem;
+      color: var(--light-color);
+    }
+
+    .recent-orders {
+      margin-bottom: 3rem;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      color: var(--black);
+    }
+
+    .view-all {
+      font-size: 1.4rem;
+      color: var(--pink);
+      display: flex;
+      align-items: center;
+    }
+
+    .view-all i {
+      margin-left: 0.5rem;
+    }
+
+    .order-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .order-table th, .order-table td {
+      padding: 1.5rem;
+      text-align: left;
+      border-bottom: 1px solid #f1f1f1;
+      font-size: 1.4rem;
+    }
+
+    .order-table th {
+      color: var(--black);
+      font-weight: 600;
+      background: #f9f9f9;
+    }
+
+    .order-table td {
+      color: var(--light-color);
+    }
+
+    .status {
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+
+    .status.delivered {
+      background: rgba(76, 175, 80, 0.1);
+      color: var(--green);
+    }
+
+    .status.processing {
+      background: rgba(255, 152, 0, 0.1);
+      color: #ff9800;
+    }
+
+    .status.cancelled {
+      background: rgba(244, 67, 54, 0.1);
+      color: #f44336;
+    }
+
+    .action-btn {
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: var(--light-color);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .action-btn:hover {
+      color: var(--pink);
+    }
+
+    .product-form {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 1.6rem;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1.5rem;
+      font-size: 1.6rem;
+      border: 1px solid #e1e1e1;
+      border-radius: 0.5rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--pink);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .file-upload {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem;
+      border: 2px dashed #e1e1e1;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+
+    .file-upload:hover {
+      border-color: var(--pink);
+    }
+
+    .file-upload i {
+      font-size: 4rem;
+      color: var(--light-color);
+      margin-bottom: 1rem;
+    }
+
+    .file-upload p {
+      font-size: 1.6rem;
+      color: var(--light-color);
+    }
+
+    .file-upload input {
+      display: none;
+    }
+
+    .submit-btn {
+      background: var(--pink);
+      color: #fff;
+      padding: 1.5rem 3rem;
+      font-size: 1.6rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      display: block;
+      margin: 3rem auto 0;
+    }
+
+    .submit-btn:hover {
+      background: #d03177;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .admin-tabs {
+        flex-direction: column;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .admin-header h1 {
+        font-size: 3rem;
+      }
+      
+      .admin-header p {
+        font-size: 1.5rem;
+      }
+      
+      .stat-card {
+        padding: 1.5rem;
+      }
+      
+      .stat-icon {
+        width: 5rem;
+        height: 5rem;
+        font-size: 2rem;
+      }
+      
+      .stat-details h3 {
+        font-size: 2rem;
+      }
+      
+      .order-table th, .order-table td {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+
+    <a href="flowerweb.html" class="logo">flower<span>.</span></a>
+    <nav class="navbar">
+      <a href="flowerweb.html#home">home</a>
+      <a href="flowerweb.html#about">about</a>
+      <a href="flowerweb.html#products">products</a>
+      <a href="flowerweb.html#review">review</a>
+      <a href="contact.html">contact us</a>
+      <a href="admin.html" class="active">admin</a>
+      <a href="reservation.html">reservation</a>
+    </nav>
+
+    <div class="icons">
+      <a href="#" class="fas fa-heart"></a>
+      <div class="cart-icon-container">
+        <a href="#" class="fas fa-shopping-cart" id="cart-btn"></a>
+        <span class="cart-count">0</span>
+      </div>
+      <a href="login.html" class="fas fa-user"></a>
+    </div>
+
+    <div class="cart-overlay"></div>
+    <div class="cart-container">
+      <div class="cart-header">
+        <h2>Your Cart</h2>
+        <div class="close-cart"><i class="fas fa-times"></i></div>
+      </div>
+      <div class="cart-items">
+        <p style="padding: 1rem 0; text-align: center;">Your cart is empty.</p>
+      </div>
+      <div class="cart-total">
+        Total: <span>₹0</span>
+      </div>
+      <button class="checkout-btn">Checkout</button>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <!-- Admin Header -->
+    <div class="admin-header">
+      <h1>Admin Dashboard</h1>
+      <p>Manage your products, orders, and store performance all in one place</p>
+    </div>
+
+    <!-- Admin Tabs -->
+    <div class="admin-tabs">
+      <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+      <button class="tab-btn" data-tab="products">Products</button>
+      <button class="tab-btn" data-tab="orders">Orders</button>
+      <button class="tab-btn" data-tab="customers">Customers</button>
+      <button class="tab-btn" data-tab="settings">Settings</button>
+    </div>
+
+    <!-- Dashboard Tab -->
+    <div class="tab-content active" id="dashboard">
+      <div class="dashboard-stats">
+        <div class="stat-card">
+          <div class="stat-icon sales">
+            <i class="fas fa-rupee-sign"></i>
+          </div>
+          <div class="stat-details">
+            <h3>₹24,500</h3>
+            <p>Total Sales</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon orders">
+            <i class="fas fa-shopping-bag"></i>
+          </div>
+          <div class="stat-details">
+            <h3>152</h3>
+            <p>Total Orders</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon customers">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-details">
+            <h3>85</h3>
+            <p>Customers</p>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon products">
+            <i class="fas fa-box"></i>
+          </div>
+          <div class="stat-details">
+            <h3>24</h3>
+            <p>Products</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="recent-orders">
+        <div class="section-header">
+          <h2>Recent Orders</h2>
+          <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <table class="order-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#ORD-7652</td>
+              <td>Priya Sharma</td>
+              <td>May 20, 2025</td>
+              <td>₹1,250</td>
+              <td><span class="status delivered">Delivered</span></td>
+              <td>
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="fas fa-edit"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>#ORD-7651</td>
+              <td>Rahul Mehta</td>
+              <td>May 19, 2025</td>
+              <td>₹850</td>
+              <td><span class="status processing">Processing</span></td>
+              <td>
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="fas fa-edit"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>#ORD-7650</td>
+              <td>Ananya Patel</td>
+              <td>May 19, 2025</td>
+              <td>₹2,100</td>
+              <td><span class="status delivered">Delivered</span></td>
+              <td>
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="fas fa-edit"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>#ORD-7649</td>
+              <td>Vikram Singh</td>
+              <td>May 18, 2025</td>
+              <td>₹750</td>
+              <td><span class="status cancelled">Cancelled</span></td>
+              <td>
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="fas fa-edit"></i></button>
+              </td>
+            </tr>
+            <tr>
+              <td>#ORD-7648</td>
+              <td>Neha Gupta</td>
+              <td>May 18, 2025</td>
+              <td>₹1,450</td>
+              <td><span class="status delivered">Delivered</span></td>
+              <td>
+                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                <button class="action-btn"><i class="fas fa-edit"></i></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Products Tab -->
+    <div class="tab-content" id="products">
+      <div class="section-header">
+        <h2>Add New Product</h2>
+      </div>
+
+      <form class="product-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="product-name">Product Name</label>
+            <input type="text" id="product-name" class="form-control" placeholder="Enter product name">
+          </div>
+          <div class="form-group">
+            <label for="product-category">Category</label>
+            <select id="product-category" class="form-control">
+              <option value="">Select category</option>
+              <option value="bouquets">Bouquets</option>
+              <option value="potted-plants">Potted Plants</option>
+              <option value="flower-arrangements">Flower Arrangements</option>
+              <option value="gifts">Gifts</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="product-price">Price (₹)</label>
+            <input type="number" id="product-price" class="form-control" placeholder="Enter price">
+          </div>
+          <div class="form-group">
+            <label for="product-discount">Discount (%)</label>
+            <input type="number" id="product-discount" class="form-control" placeholder="Enter discount percentage">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="product-description">Description</label>
+          <textarea id="product-description" class="form-control" rows="4" placeholder="Enter product description"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Product Image</label>
+          <div class="file-upload">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Drag and drop image or click to browse</p>
+            <input type="file" id="product-image" accept="image/*">
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Add Product</button>
+      </form>
+    </div>
+
+    <!-- Orders Tab -->
+    <div class="tab-content" id="orders">
+      <div class="section-header">
+        <h2>All Orders</h2>
+      </div>
+
+      <table class="order-table">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Date</th>
+            <th>Products</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#ORD-7652</td>
+            <td>Priya Sharma</td>
+            <td>May 20, 2025</td>
+            <td>Rose Bouquet, Lily Vase</td>
+            <td>₹1,250</td>
+            <td><span class="status delivered">Delivered</span></td>
+            <td>
+              <button class="action-btn"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-edit"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>#ORD-7651</td>
+            <td>Rahul Mehta</td>
+            <td>May 19, 2025</td>
+            <td>Tulip Arrangement</td>
+            <td>₹850</td>
+            <td><span class="status processing">Processing</span></td>
+            <td>
+              <button class="action-btn"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-edit"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>#ORD-7650</td>
+            <td>Ananya Patel</td>
+            <td>May 19, 2025</td>
+            <td>Orchid Plant, Flower Pot</td>
+            <td>₹2,100</td>
+            <td><span class="status delivered">Delivered</span></td>
+            <td>
+              <button class="action-btn"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-edit"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>#ORD-7649</td>
+            <td>Vikram Singh</td>
+            <td>May 18, 2025</td>
+            <td>Sunflower Bouquet</td>
+            <td>₹750</td>
+            <td><span class="status cancelled">Cancelled</span></td>
+            <td>
+              <button class="action-btn"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-edit"></i></button>
+            </td>
+          </tr>
+          <tr>
+            <td>#ORD-7648</td>
+            <td>Neha Gupta</td>
+            <td>May 18, 2025</td>
+            <td>Mixed Flower Arrangement, Gift Box</td>
+            <td>₹1,450</td>
+            <td><span class="status delivered">Delivered</span></td>
+            <td>
+              <button class="action-btn"><i class="fas fa-eye"></i></button>
+              <button class="action-btn"><i class="fas fa-edit"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Customers Tab -->
+    <div class="tab-content" id="customers">
+      <div class="section-header">
+        <h2>Customer Management</h2>
+      </div>
+      
+      <p style="font-size: 1.6rem; text-align: center; padding: 5rem 0;">Customer management section is under development.</p>
+    </div>
+
+    <!-- Settings Tab -->
+    <div class="tab-content" id="settings">
+      <div class="section-header">
+        <h2>Store Settings</h2>
+      </div>
+      
+      <p style="font-size: 1.6rem; text-align: center; padding: 5rem 0;">Settings section is under development.</p>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <section class="footer">
+    <div class="box-container">
+      <div class="box">
+        <h3>Quick Links</h3>
+        <a href="flowerweb.html#home">home</a>
+        <a href="flowerweb.html#about">about</a>
+        <a href="flowerweb.html#products">products</a>
+        <a href="flowerweb.html#review">review</a>
+      </div>
+
+      <div class="box">
+        <h3>Extra Links</h3>
+        <a href="#">my account</a>
+        <a href="#">my order</a>
+        <a href="#">my favorite</a>
+      </div>
+
+      <div class="box">
+        <h3>Locations</h3>
+        <a href="#">India</a>
+        <a href="#">USA</a>
+        <a href="#">Japan</a>
+        <a href="#">France</a>
+      </div>
+
+      <div class="box">
+        <h3>Contact Info</h3>
+        <a href="#">+123-456-7890</a>
+        <a href="#">example@gmail.com</a>
+        <a href="#">Mumbai, India - 400104</a>
+        <img src="payment.png" alt="">
+      </div>
+    </div>
+
+    <div class="credit"> Created by <span> Flower Shop </span> | All Rights Reserved </div>
+  </section>
+
+  <script>
+    // Tab functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      const tabContents = document.querySelectorAll('.tab-content');
+      
+      tabBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          // Remove active class from all buttons and contents
+          tabBtns.forEach(btn => btn.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          // Show corresponding content
+          const tabId = this.getAttribute('data-tab');
+          document.getElementById(tabId).classList.add('active');
+        });
+      });
+      
+      // File upload preview
+      const fileUpload = document.querySelector('.file-upload');
+      const fileInput = document.getElementById('product-image');
+      
+      if (fileUpload && fileInput) {
+        fileUpload.addEventListener('click', function() {
+          fileInput.click();
+        });
+        
+        fileInput.addEventListener('change', function() {
+          if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              fileUpload.innerHTML = `
+                <img src="${e.target.result}" style="max-width: 100%; max-height: 200px; margin-bottom: 1rem;">
+                <p>${fileInput.files[0].name}</p>
+                <input type="file" id="product-image" accept="image/*" style="display: none;">
+              `;
+            }
+            reader.readAsDataURL(this.files[0]);
+          }
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

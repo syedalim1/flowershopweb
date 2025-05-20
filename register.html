@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | Flower Store</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+  <link rel="stylesheet" href="project.css">
+  <script src="script.js"></script>
+
+  <style>
+    /* Register Page Specific Styles */
+    .auth-container {
+      margin-top: 7rem;
+      padding: 5rem 9%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(100vh - 7rem - 10rem);
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 50rem;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: var(--box-shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .auth-header {
+      background: linear-gradient(135deg, #4caf50, #8bc34a);
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .auth-header h2 {
+      font-size: 3rem;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+
+    .auth-header p {
+      font-size: 1.6rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .auth-header::after {
+      content: '';
+      position: absolute;
+      bottom: -2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 2rem solid transparent;
+      border-right: 2rem solid transparent;
+      border-top: 2rem solid #8bc34a;
+    }
+
+    .auth-body {
+      padding: 4rem 3rem 3rem;
+    }
+
+    .form-group {
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 1.6rem;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1.5rem;
+      padding-left: 4.5rem;
+      font-size: 1.6rem;
+      border: 1px solid #e1e1e1;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .form-icon {
+      position: absolute;
+      top: 4.2rem;
+      left: 1.5rem;
+      font-size: 1.8rem;
+      color: var(--light-color);
+    }
+
+    .form-group:focus-within .form-icon {
+      color: var(--green);
+    }
+
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 2.5rem;
+    }
+
+    .terms input {
+      width: 1.8rem;
+      height: 1.8rem;
+      margin-right: 1rem;
+      margin-top: 0.3rem;
+      accent-color: var(--green);
+    }
+
+    .terms label {
+      font-size: 1.5rem;
+      color: var(--light-color);
+      margin-bottom: 0;
+      line-height: 1.5;
+    }
+
+    .terms label a {
+      color: var(--green);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .terms label a:hover {
+      color: var(--black);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1.5rem;
+      background: var(--green);
+      color: #fff;
+      font-size: 1.7rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: var(--light-green);
+    }
+
+    .social-login {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .social-login p {
+      font-size: 1.6rem;
+      color: var(--light-color);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .social-login p::before,
+    .social-login p::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 25%;
+      height: 1px;
+      background: #e1e1e1;
+    }
+
+    .social-login p::before {
+      left: 0;
+    }
+
+    .social-login p::after {
+      right: 0;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .social-icon {
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icon:hover {
+      transform: translateY(-5px);
+    }
+
+    .facebook {
+      background: #3b5999;
+    }
+
+    .google {
+      background: #dd4b39;
+    }
+
+    .twitter {
+      background: #55acee;
+    }
+
+    .auth-footer {
+      text-align: center;
+      margin-top: 3rem;
+      font-size: 1.6rem;
+      color: var(--light-color);
+    }
+
+    .auth-footer a {
+      color: var(--green);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .auth-footer a:hover {
+      color: var(--black);
+    }
+
+    /* Password strength indicator */
+    .password-strength {
+      height: 0.5rem;
+      background: #e1e1e1;
+      margin-top: 1rem;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    .password-strength-meter {
+      height: 100%;
+      width: 0;
+      transition: width 0.3s ease, background 0.3s ease;
+    }
+
+    .weak {
+      width: 33.33%;
+      background: #f44336;
+    }
+
+    .medium {
+      width: 66.66%;
+      background: #ff9800;
+    }
+
+    .strong {
+      width: 100%;
+      background: #4caf50;
+    }
+
+    .password-feedback {
+      font-size: 1.2rem;
+      color: var(--light-color);
+      margin-top: 0.5rem;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .auth-container {
+        padding: 3rem 5%;
+      }
+      
+      .auth-header {
+        padding: 2.5rem 1.5rem;
+      }
+      
+      .auth-header h2 {
+        font-size: 2.5rem;
+      }
+      
+      .auth-body {
+        padding: 3rem 2rem 2rem;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+
+    <a href="flowerweb.html" class="logo">flower<span>.</span></a>
+    <nav class="navbar">
+      <a href="flowerweb.html">home</a>
+      <a href="flowerweb.html#about">about</a>
+      <a href="flowerweb.html#products">products</a>
+      <a href="flowerweb.html#review">review</a>
+      <a href="contact.html">contact us</a>
+      <a href="admin.html">admin</a>
+      <a href="reservation.html">reservation</a>
+    </nav>
+
+    <div class="icons">
+      <a href="#" class="fas fa-heart"></a>
+      <div class="cart-icon-container">
+        <a href="#" class="fas fa-shopping-cart" id="cart-btn"></a>
+        <span class="cart-count">0</span>
+      </div>
+      <a href="login.html" class="fas fa-user active"></a>
+    </div>
+
+    <div class="cart-overlay"></div>
+    <div class="cart-container">
+      <div class="cart-header">
+        <h2>Your Cart</h2>
+        <div class="close-cart"><i class="fas fa-times"></i></div>
+      </div>
+      <div class="cart-items">
+        <p style="padding: 1rem 0; text-align: center;">Your cart is empty.</p>
+      </div>
+      <div class="cart-total">
+        Total: <span>₹0</span>
+      </div>
+      <button class="checkout-btn">Checkout</button>
+    </div>
+  </header>
+
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Create Account</h2>
+        <p>Join our flower community today</p>
+      </div>
+      
+      <div class="auth-body">
+        <form id="register-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first-name">First Name</label>
+              <i class="fas fa-user form-icon"></i>
+              <input type="text" id="first-name" class="form-control" placeholder="First name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="last-name">Last Name</label>
+              <i class="fas fa-user form-icon"></i>
+              <input type="text" id="last-name" class="form-control" placeholder="Last name" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <i class="fas fa-envelope form-icon"></i>
+            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <i class="fas fa-phone-alt form-icon"></i>
+            <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <i class="fas fa-lock form-icon"></i>
+            <input type="password" id="password" class="form-control" placeholder="Create a password" required>
+            <div class="password-strength">
+              <div class="password-strength-meter"></div>
+            </div>
+            <div class="password-feedback">Password should be at least 8 characters</div>
+          </div>
+          
+          <div class="form-group">
+            <label for="confirm-password">Confirm Password</label>
+            <i class="fas fa-lock form-icon"></i>
+            <input type="password" id="confirm-password" class="form-control" placeholder="Confirm your password" required>
+          </div>
+          
+          <div class="terms">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+          </div>
+          
+          <button type="submit" class="submit-btn">Create Account</button>
+        </form>
+        
+        <div class="social-login">
+          <p>Or sign up with</p>
+          <div class="social-icons">
+            <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon google"><i class="fab fa-google"></i></a>
+            <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+        
+        <div class="auth-footer">
+          Already have an account? <a href="login.html">Login</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <section class="footer">
+    <div class="box-container">
+      <div class="box">
+        <h3>Quick Links</h3>
+        <a href="flowerweb.html">home</a>
+        <a href="flowerweb.html#about">about</a>
+        <a href="flowerweb.html#products">products</a>
+        <a href="flowerweb.html#review">review</a>
+      </div>
+
+      <div class="box">
+        <h3>Extra Links</h3>
+        <a href="login.html">my account</a>
+        <a href="login.html">my order</a>
+        <a href="login.html">my favorite</a>
+      </div>
+
+      <div class="box">
+        <h3>Locations</h3>
+        <a href="#">India</a>
+        <a href="#">USA</a>
+        <a href="#">Japan</a>
+        <a href="#">France</a>
+      </div>
+
+      <div class="box">
+        <h3>Contact Info</h3>
+        <a href="#">+123-456-7890</a>
+        <a href="#">example@gmail.com</a>
+        <a href="#">Mumbai, India - 400104</a>
+        <img src="payment.png" alt="">
+      </div>
+    </div>
+
+    <div class="credit"> Created by <span> Flower Shop </span> | All Rights Reserved </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const registerForm = document.getElementById('register-form');
+      const passwordInput = document.getElementById('password');
+      const confirmPasswordInput = document.getElementById('confirm-password');
+      const passwordStrengthMeter = document.querySelector('.password-strength-meter');
+      const passwordFeedback = document.querySelector('.password-feedback');
+      
+      // Password strength checker
+      if (passwordInput) {
+        passwordInput.addEventListener('input', function() {
+          const password = this.value;
+          let strength = 0;
+          
+          if (password.length >= 8) strength += 1;
+          if (password.match(/[A-Z]/)) strength += 1;
+          if (password.match(/[0-9]/)) strength += 1;
+          if (password.match(/[^A-Za-z0-9]/)) strength += 1;
+          
+          switch (strength) {
+            case 0:
+              passwordStrengthMeter.className = 'password-strength-meter';
+              passwordStrengthMeter.style.width = '0';
+              passwordFeedback.textContent = 'Password should be at least 8 characters';
+              break;
+            case 1:
+              passwordStrengthMeter.className = 'password-strength-meter weak';
+              passwordFeedback.textContent = 'Weak password';
+              break;
+            case 2:
+            case 3:
+              passwordStrengthMeter.className = 'password-strength-meter medium';
+              passwordFeedback.textContent = 'Medium strength password';
+              break;
+            case 4:
+              passwordStrengthMeter.className = 'password-strength-meter strong';
+              passwordFeedback.textContent = 'Strong password';
+              break;
+          }
+        });
+      }
+      
+      // Form submission
+      if (registerForm) {
+        registerForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Check if passwords match
+          if (passwordInput.value !== confirmPasswordInput.value) {
+            alert('Passwords do not match!');
+            return;
+          }
+          
+          // Get form values
+          const firstName = document.getElementById('first-name').value;
+          const lastName = document.getElementById('last-name').value;
+          const email = document.getElementById('email').value;
+          const phone = document.getElementById('phone').value;
+          const password = passwordInput.value;
+          
+          // Here you would typically send these values to a server for registration
+          // For demo purposes, we'll just simulate a successful registration
+          
+          // Show success message
+          alert('Registration successful! Welcome ' + firstName + '!');
+          
+          // Redirect to login page after successful registration
+          window.location.href = 'login.html';
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

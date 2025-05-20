@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content | Flower Store</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+  <link rel="stylesheet" href="project.css">
+  <script src="script.js"></script>
+
+  <style>
+    /* Content Page Specific Styles */
+    .content-hero {
+      background: linear-gradient(135deg, #f8bbd0, #e1bee7, #bbdefb);
+      padding: 8rem 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 7rem;
+    }
+
+    .content-hero h1 {
+      font-size: 5rem;
+      color: #fff;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .content-hero p {
+      font-size: 2rem;
+      color: #fff;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .floating-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .floating-element {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      animation: float 15s infinite ease-in-out;
+    }
+
+    .floating-element:nth-child(1) {
+      width: 150px;
+      height: 150px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .floating-element:nth-child(2) {
+      width: 100px;
+      height: 100px;
+      top: 50%;
+      left: 20%;
+      animation-delay: 2s;
+    }
+
+    .floating-element:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      top: 30%;
+      right: 30%;
+      animation-delay: 4s;
+    }
+
+    .floating-element:nth-child(4) {
+      width: 120px;
+      height: 120px;
+      bottom: 20%;
+      right: 10%;
+      animation-delay: 6s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(10deg);
+      }
+    }
+
+    .content-section {
+      padding: 5rem 9%;
+    }
+
+    .content-section h2 {
+      font-size: 3.5rem;
+      color: var(--black);
+      margin-bottom: 3rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .content-section h2::after {
+      content: "";
+      position: absolute;
+      bottom: -1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8rem;
+      height: 0.4rem;
+      background: var(--pink);
+      border-radius: 0.5rem;
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+      gap: 3rem;
+    }
+
+    .article-card {
+      background: #fff;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .article-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .article-image {
+      height: 25rem;
+      overflow: hidden;
+    }
+
+    .article-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .article-card:hover .article-image img {
+      transform: scale(1.1);
+    }
+
+    .article-content {
+      padding: 2rem;
+    }
+
+    .article-content h3 {
+      font-size: 2.2rem;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+
+    .article-content p {
+      font-size: 1.6rem;
+      color: var(--light-color);
+      margin-bottom: 2rem;
+    }
+
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.4rem;
+      color: var(--light-color);
+    }
+
+    .article-meta .date {
+      display: flex;
+      align-items: center;
+    }
+
+    .article-meta .date i {
+      margin-right: 0.5rem;
+      color: var(--pink);
+    }
+
+    .article-meta .read-more {
+      color: var(--pink);
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .article-meta .read-more:hover {
+      color: var(--black);
+    }
+
+    .newsletter {
+      background: linear-gradient(135deg, #f8bbd0, #e1bee7);
+      padding: 5rem 9%;
+      text-align: center;
+      border-radius: 1rem;
+      margin: 5rem 9%;
+    }
+
+    .newsletter h2 {
+      font-size: 3rem;
+      color: #fff;
+      margin-bottom: 2rem;
+    }
+
+    .newsletter p {
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 3rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .newsletter-form {
+      display: flex;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 1.5rem;
+      font-size: 1.6rem;
+      border-radius: 0.5rem 0 0 0.5rem;
+      border: none;
+    }
+
+    .newsletter-form button {
+      background: var(--green);
+      color: #fff;
+      padding: 1.5rem 3rem;
+      font-size: 1.6rem;
+      border: none;
+      border-radius: 0 0.5rem 0.5rem 0;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      background: var(--light-green);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .content-hero h1 {
+        font-size: 3.5rem;
+      }
+      
+      .content-hero p {
+        font-size: 1.6rem;
+      }
+      
+      .newsletter-form {
+        flex-direction: column;
+      }
+      
+      .newsletter-form input {
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+      }
+      
+      .newsletter-form button {
+        border-radius: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+
+    <a href="flowerweb.html" class="logo">flower<span>.</span></a>
+    <nav class="navbar">
+      <a href="flowerweb.html#home">home</a>
+      <a href="flowerweb.html#about">about</a>
+      <a href="flowerweb.html#products">products</a>
+      <a href="flowerweb.html#review">review</a>
+      <a href="content.html" class="active">content</a>
+      <a href="admin.html">admin</a>
+      <a href="reservation.html">reservation</a>
+    </nav>
+
+    <div class="icons">
+      <a href="#" class="fas fa-heart"></a>
+      <div class="cart-icon-container">
+        <a href="#" class="fas fa-shopping-cart" id="cart-btn"></a>
+        <span class="cart-count">0</span>
+      </div>
+      <a href="login.html" class="fas fa-user"></a>
+    </div>
+
+    <div class="cart-overlay"></div>
+    <div class="cart-container">
+      <div class="cart-header">
+        <h2>Your Cart</h2>
+        <div class="close-cart"><i class="fas fa-times"></i></div>
+      </div>
+      <div class="cart-items">
+        <p style="padding: 1rem 0; text-align: center;">Your cart is empty.</p>
+      </div>
+      <div class="cart-total">
+        Total: <span>₹0</span>
+      </div>
+      <button class="checkout-btn">Checkout</button>
+    </div>
+  </header>
+
+  <!-- Content Hero Section -->
+  <section class="content-hero">
+    <div class="floating-elements">
+      <div class="floating-element"></div>
+      <div class="floating-element"></div>
+      <div class="floating-element"></div>
+      <div class="floating-element"></div>
+    </div>
+    <h1>Flower Care & Inspiration</h1>
+    <p>Discover the latest trends, care tips, and inspiration for your floral arrangements</p>
+  </section>
+
+  <!-- Featured Articles Section -->
+  <section class="content-section">
+    <h2>Featured Articles</h2>
+    <div class="article-grid">
+      <div class="article-card">
+        <div class="article-image">
+          <img src="https://images.unsplash.com/photo-1508610048659-a06b669e3321?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Flower Care">
+        </div>
+        <div class="article-content">
+          <h3>Essential Tips for Longer Lasting Flowers</h3>
+          <p>Learn the secrets to keeping your cut flowers fresh and vibrant for weeks. From water quality to sunlight exposure, these tips will transform your floral arrangements.</p>
+          <div class="article-meta">
+            <div class="date"><i class="far fa-calendar-alt"></i> May 15, 2025</div>
+            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-card">
+        <div class="article-image">
+          <img src="https://images.unsplash.com/photo-1563241527-3004b7be0ffd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Seasonal Flowers">
+        </div>
+        <div class="article-content">
+          <h3>Seasonal Blooms: Summer Edition</h3>
+          <p>Explore the vibrant world of summer flowers. From sunflowers to dahlias, discover which blooms thrive in the heat and how to incorporate them into your home decor.</p>
+          <div class="article-meta">
+            <div class="date"><i class="far fa-calendar-alt"></i> May 10, 2025</div>
+            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-card">
+        <div class="article-image">
+          <img src="https://images.unsplash.com/photo-1562690868-60bbe7293e94?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wedding Flowers">
+        </div>
+        <div class="article-content">
+          <h3>Wedding Flower Trends for 2025</h3>
+          <p>Planning a wedding? Discover the hottest floral trends for 2025. From sustainable arrangements to bold color palettes, find inspiration for your special day.</p>
+          <div class="article-meta">
+            <div class="date"><i class="far fa-calendar-alt"></i> May 5, 2025</div>
+            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Articles Section -->
+  <section class="content-section">
+    <h2>Latest Articles</h2>
+    <div class="article-grid">
+      <div class="article-card">
+        <div class="article-image">
+          <img src="https://images.unsplash.com/photo-1531685250784-7569952593d2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Indoor Plants">
+        </div>
+        <div class="article-content">
+          <h3>Best Indoor Plants for Beginners</h3>
+          <p>New to plant parenting? Discover low-maintenance indoor plants that are perfect for beginners. These resilient beauties will thrive even with minimal care.</p>
+          <div class="article-meta">
+            <div class="date"><i class="far fa-calendar-alt"></i> May 1, 2025</div>
+            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-card">
+        <div class="article-image">
+          <img src="https://images.unsplash.com/photo-1487070183336-b863922373a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Flower Arrangement">
+        </div>
+        <div class="article-content">
+          <h3>DIY Flower Arrangements: Step by Step</h3>
+          <p>Create professional-looking flower arrangements at home with our step-by-step guide. Learn about color theory, balance, and the essential tools you'll need.</p>
+          <div class="article-meta">
+            <div class="date"><i class="far fa-calendar-alt"></i> April 28, 2025</div>
+            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="article-card">
+        <div class="article-image">
+          <img src="https://images.unsplash.com/photo-1556801712-76c8eb07bbc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Sustainable Gardening">
+        </div>
+        <div class="article-content">
+          <h3>Sustainable Gardening Practices</h3>
+          <p>Learn how to create an eco-friendly garden that supports local wildlife and reduces your environmental footprint. Discover organic fertilizers and water conservation techniques.</p>
+          <div class="article-meta">
+            <div class="date"><i class="far fa-calendar-alt"></i> April 22, 2025</div>
+            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <div class="newsletter">
+    <h2>Subscribe to Our Newsletter</h2>
+    <p>Stay updated with our latest articles, seasonal tips, and exclusive offers. Join our community of flower enthusiasts!</p>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Enter your email address" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+
+  <!-- Footer Section -->
+  <section class="footer">
+    <div class="box-container">
+      <div class="box">
+        <h3>Quick Links</h3>
+        <a href="flowerweb.html#home">home</a>
+        <a href="flowerweb.html#about">about</a>
+        <a href="flowerweb.html#products">products</a>
+        <a href="flowerweb.html#review">review</a>
+      </div>
+
+      <div class="box">
+        <h3>Extra Links</h3>
+        <a href="#">my account</a>
+        <a href="#">my order</a>
+        <a href="#">my favorite</a>
+      </div>
+
+      <div class="box">
+        <h3>Locations</h3>
+        <a href="#">India</a>
+        <a href="#">USA</a>
+        <a href="#">Japan</a>
+        <a href="#">France</a>
+      </div>
+
+      <div class="box">
+        <h3>Contact Info</h3>
+        <a href="#">+123-456-7890</a>
+        <a href="#">example@gmail.com</a>
+        <a href="#">Mumbai, India - 400104</a>
+        <img src="payment.png" alt="">
+      </div>
+    </div>
+
+    <div class="credit"> Created by <span> Flower Shop </span> | All Rights Reserved </div>
+  </section>
+
+</body>
+
+</html>

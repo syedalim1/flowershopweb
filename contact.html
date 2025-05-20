@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Flower Store</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+
+  <link rel="stylesheet" href="project.css">
+  <script src="script.js"></script>
+
+  <style>
+    /* Contact Page Specific Styles */
+    .contact-container {
+      margin-top: 7rem;
+      padding: 3rem 9%;
+    }
+
+    .contact-hero {
+      background: linear-gradient(135deg, #e84393, #a94caf);
+      padding: 6rem 3rem;
+      border-radius: 1rem;
+      text-align: center;
+      margin-bottom: 5rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+
+    .contact-hero h1 {
+      font-size: 4.5rem;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-hero p {
+      font-size: 1.8rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-hero::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 1;
+    }
+
+    .contact-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      left: -50px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 1;
+    }
+
+    .floating-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .floating-element {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      animation: float 15s infinite ease-in-out;
+    }
+
+    .floating-element:nth-child(1) {
+      width: 150px;
+      height: 150px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .floating-element:nth-child(2) {
+      width: 100px;
+      height: 100px;
+      top: 50%;
+      left: 20%;
+      animation-delay: 2s;
+    }
+
+    .floating-element:nth-child(3) {
+      width: 80px;
+      height: 80px;
+      top: 30%;
+      right: 30%;
+      animation-delay: 4s;
+    }
+
+    .floating-element:nth-child(4) {
+      width: 120px;
+      height: 120px;
+      bottom: 20%;
+      right: 10%;
+      animation-delay: 6s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+      50% {
+        transform: translateY(-20px) rotate(10deg);
+      }
+    }
+
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 5rem;
+    }
+
+    .contact-info {
+      padding: 3rem;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: var(--box-shadow);
+    }
+
+    .contact-info h2 {
+      font-size: 2.8rem;
+      color: var(--black);
+      margin-bottom: 2rem;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    .contact-info h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 6rem;
+      height: 0.3rem;
+      background: var(--pink);
+      border-radius: 0.5rem;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 2.5rem;
+    }
+
+    .info-icon {
+      width: 5rem;
+      height: 5rem;
+      background: rgba(232, 67, 147, 0.1);
+      color: var(--pink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-right: 2rem;
+      flex-shrink: 0;
+    }
+
+    .info-content h3 {
+      font-size: 1.8rem;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+    }
+
+    .info-content p {
+      font-size: 1.5rem;
+      color: var(--light-color);
+      line-height: 1.6;
+    }
+
+    .social-links {
+      margin-top: 3rem;
+    }
+
+    .social-links h3 {
+      font-size: 2rem;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .social-icon {
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: #fff;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icon:hover {
+      transform: translateY(-5px);
+    }
+
+    .facebook {
+      background: #3b5999;
+    }
+
+    .instagram {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    }
+
+    .twitter {
+      background: #55acee;
+    }
+
+    .pinterest {
+      background: #bd081c;
+    }
+
+    .contact-form {
+      padding: 3rem;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: var(--box-shadow);
+    }
+
+    .contact-form h2 {
+      font-size: 2.8rem;
+      color: var(--black);
+      margin-bottom: 2rem;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    .contact-form h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 6rem;
+      height: 0.3rem;
+      background: var(--pink);
+      border-radius: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 1.6rem;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1.5rem;
+      font-size: 1.6rem;
+      border: 1px solid #e1e1e1;
+      border-radius: 0.5rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--pink);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .submit-btn {
+      background: var(--pink);
+      color: #fff;
+      padding: 1.5rem 3rem;
+      font-size: 1.6rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .submit-btn:hover {
+      background: #d03177;
+    }
+
+    .success-message {
+      display: none;
+      background: rgba(76, 175, 80, 0.1);
+      color: var(--green);
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      font-size: 1.6rem;
+      text-align: center;
+      margin-top: 2rem;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .success-message.show {
+      opacity: 1;
+    }
+
+    .map-container {
+      margin-top: 5rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      height: 45rem;
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .faq-section {
+      margin-top: 5rem;
+      padding: 5rem;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: var(--box-shadow);
+    }
+
+    .faq-section h2 {
+      font-size: 3rem;
+      color: var(--black);
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    .faq-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 8rem;
+      height: 0.3rem;
+      background: var(--pink);
+      border-radius: 0.5rem;
+    }
+
+    .faq-item {
+      margin-bottom: 2rem;
+      border: 1px solid #e1e1e1;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 2rem;
+      background: #f9f9f9;
+      font-size: 1.8rem;
+      color: var(--black);
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: #f5f5f5;
+    }
+
+    .faq-question i {
+      font-size: 1.6rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-answer {
+      padding: 0 2rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-answer p {
+      font-size: 1.6rem;
+      color: var(--light-color);
+      line-height: 1.6;
+      padding-bottom: 2rem;
+    }
+
+    .faq-item.active .faq-question {
+      background: rgba(232, 67, 147, 0.05);
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(180deg);
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 20rem;
+      padding-top: 2rem;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .contact-content {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .contact-hero h1 {
+        font-size: 3rem;
+      }
+      
+      .contact-hero p {
+        font-size: 1.5rem;
+      }
+      
+      .faq-section {
+        padding: 3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+
+    <a href="flowerweb.html" class="logo">flower<span>.</span></a>
+    <nav class="navbar">
+      <a href="flowerweb.html">home</a>
+      <a href="flowerweb.html#about">about</a>
+      <a href="flowerweb.html#products">products</a>
+      <a href="flowerweb.html#review">review</a>
+      <a href="contact.html" class="active">contact us</a>
+      <a href="admin.html">admin</a>
+      <a href="reservation.html">reservation</a>
+    </nav>
+
+    <div class="icons">
+      <a href="#" class="fas fa-heart"></a>
+      <div class="cart-icon-container">
+        <a href="#" class="fas fa-shopping-cart" id="cart-btn"></a>
+        <span class="cart-count">0</span>
+      </div>
+      <a href="login.html" class="fas fa-user"></a>
+    </div>
+
+    <div class="cart-overlay"></div>
+    <div class="cart-container">
+      <div class="cart-header">
+        <h2>Your Cart</h2>
+        <div class="close-cart"><i class="fas fa-times"></i></div>
+      </div>
+      <div class="cart-items">
+        <p style="padding: 1rem 0; text-align: center;">Your cart is empty.</p>
+      </div>
+      <div class="cart-total">
+        Total: <span>₹0</span>
+      </div>
+      <button class="checkout-btn">Checkout</button>
+    </div>
+  </header>
+
+  <div class="contact-container">
+    <!-- Contact Hero Section -->
+    <div class="contact-hero">
+      <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+      </div>
+      <h1>Get in Touch</h1>
+      <p>We'd love to hear from you! Whether you have a question about our products, need help with an order, or want to collaborate, our team is ready to assist you.</p>
+    </div>
+
+    <!-- Contact Content Section -->
+    <div class="contact-content">
+      <!-- Contact Information -->
+      <div class="contact-info">
+        <h2>Contact Information</h2>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="info-content">
+            <h3>Our Location</h3>
+            <p>123 Flower Street, Garden District<br>Mumbai, Maharashtra 400104<br>India</p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="info-content">
+            <h3>Phone Number</h3>
+            <p>+91 123-456-7890 (Main)<br>+91 987-654-3210 (Customer Support)</p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="info-content">
+            <h3>Email Address</h3>
+            <p>info@flowerstore.com<br>support@flowerstore.com</p>
+          </div>
+        </div>
+        
+        <div class="info-item">
+          <div class="info-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="info-content">
+            <h3>Business Hours</h3>
+            <p>Monday - Friday: 9:00 AM - 8:00 PM<br>Saturday - Sunday: 10:00 AM - 6:00 PM</p>
+          </div>
+        </div>
+        
+        <div class="social-links">
+          <h3>Follow Us</h3>
+          <div class="social-icons">
+            <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon pinterest"><i class="fab fa-pinterest-p"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <h2>Send Us a Message</h2>
+        
+        <form id="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" class="form-control" placeholder="Your name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" class="form-control" placeholder="Your email" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" class="form-control" placeholder="Your phone number">
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" class="form-control" placeholder="Subject of your message" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" class="form-control" rows="5" placeholder="Write your message here..." required></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">Send Message</button>
+          
+          <div id="success-message" class="success-message">
+            Your message has been sent successfully! We'll get back to you shortly.
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241317.11609823277!2d72.74109995709657!3d19.08219783958221!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1621849051153!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          How can I track my order? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>You can track your order by logging into your account and visiting the "My Orders" section. Alternatively, you can use the tracking number provided in your order confirmation email to check the status on our website or the courier's website.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          What is your return policy? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>We offer a 10-day return policy for most products. If you're not satisfied with your purchase, you can return it within 10 days of delivery for a full refund or exchange. Please note that perishable items like fresh flowers cannot be returned unless they arrive damaged.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          Do you offer same-day delivery? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Yes, we offer same-day delivery for orders placed before 1:00 PM local time. This service is available in select cities and may incur an additional fee. Please check our delivery information page for more details about areas covered.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          How do I care for my flowers to make them last longer? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>To extend the life of your flowers, change the water every 2-3 days, trim the stems at an angle, remove any leaves below the water line, keep them away from direct sunlight and heat sources, and use the flower food provided with your arrangement.</p>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <div class="faq-question">
+          Can I customize my flower arrangement? <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="faq-answer">
+          <p>Absolutely! We offer customization options for most of our arrangements. You can specify your color preferences, add or remove certain flowers, and include a personalized message. For special requests, please contact our customer service team.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <section class="footer">
+    <div class="box-container">
+      <div class="box">
+        <h3>Quick Links</h3>
+        <a href="flowerweb.html">home</a>
+        <a href="flowerweb.html#about">about</a>
+        <a href="flowerweb.html#products">products</a>
+        <a href="flowerweb.html#review">review</a>
+      </div>
+
+      <div class="box">
+        <h3>Extra Links</h3>
+        <a href="login.html">my account</a>
+        <a href="login.html">my order</a>
+        <a href="login.html">my favorite</a>
+      </div>
+
+      <div class="box">
+        <h3>Locations</h3>
+        <a href="#">India</a>
+        <a href="#">USA</a>
+        <a href="#">Japan</a>
+        <a href="#">France</a>
+      </div>
+
+      <div class="box">
+        <h3>Contact Info</h3>
+        <a href="#">+123-456-7890</a>
+        <a href="#">example@gmail.com</a>
+        <a href="#">Mumbai, India - 400104</a>
+        <img src="payment.png" alt="">
+      </div>
+    </div>
+
+    <div class="credit"> Created by <span> Flower Shop </span> | All Rights Reserved </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Contact form submission
+      const contactForm = document.getElementById('contact-form');
+      const successMessage = document.getElementById('success-message');
+      
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Show success message
+          successMessage.style.display = 'block';
+          setTimeout(() => {
+            successMessage.classList.add('show');
+          }, 100);
+          
+          // Reset form
+          this.reset();
+          
+          // Hide message after 5 seconds
+          setTimeout(() => {
+            successMessage.classList.remove('show');
+            setTimeout(() => {
+              successMessage.style.display = 'none';
+            }, 500);
+          }, 5000);
+        });
+      }
+      
+      // FAQ accordion functionality
+      const faqItems = document.querySelectorAll('.faq-item');
+      
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', function() {
+          // Close all other items
+          faqItems.forEach(otherItem => {
+            if (otherItem !== item && otherItem.classList.contains('active')) {
+              otherItem.classList.remove('active');
+            }
+          });
+          
+          // Toggle current item
+          item.classList.toggle('active');
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>
